@@ -4,7 +4,7 @@ const path = require("path");
 const app = express();
 const weatherData = require("../utils/weatherData"); // weather API
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000; // process.env.PORT = creates a port if 3000 is being used
 
 // Path Directories
 const publicStaticDirPath = path.join(__dirname, '../public');
@@ -54,5 +54,5 @@ app.get('*', (req, res) => { // route for unknown path localhost:3000/(random)
 
 
 app.listen(port, ()=> {
-    console.log("Server is up and running on port: ", port);
+    console.log(`Server is up and running on port: ${port}`);
 })
