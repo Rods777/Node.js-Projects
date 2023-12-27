@@ -7,6 +7,10 @@ const userController = require('../controllers/userController');
 // Create, Retrieve, Update, Delete (CRUD Operations)
 
 router.get('/', userController.view); // Retrieves Data
-router.post('/', userController.find); // Searches/Finds Data from the HTML form with medthod = POST
+router.post('/', userController.find); // Searches/Finds Data from the HTML form with method = POST
+router.get('/adduser', userController.add) // Routes to Add User page
+router.post('/adduser', userController.create); // Create Data
+router.get('/edituser/:id', userController.edit) // Routes to Add User page
+router.post('/edituser/:id', userController.update); // Create Data
 
 module.exports = router;
