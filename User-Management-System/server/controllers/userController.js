@@ -208,3 +208,30 @@ exports.delete = (req, res) => {
 
     });
 };
+
+
+// View/Retrieve User Data
+exports.viewUser= (req, res) => {
+
+    pool.getConnection((err, connection) => {
+        if(err) throw err; // not connected
+        console.log('Connected as ID: ' + connection.threadId);
+        let sql = 'SELECT * FROM users WHERE usersId = ?'; // sql query
+        let userId = [req.params.id]; // gets the id in the URL
+
+       // Use the connection
+        connection.query(sql, userId, (err, rows) => { // Retrives Data from Database
+            // When done with the connection, release it.
+            connection.release();
+
+            if(!err){
+                res.render('view-user', { rows }); // Passing the data in the object of rows
+            } else{
+                console.log(err);
+            }
+
+            // console.log('The data from user table: \n', rows);
+        })
+
+    });
+};
