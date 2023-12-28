@@ -26,7 +26,8 @@ exports.view = (req, res) => {
             connection.release();
 
             if(!err){
-                res.render('home', { rows }); // Passing the data in the object of rows
+                let removedUser = req.query.removed // /?removed= for delete message
+                res.render('home', { rows, removedUser}); // Passing the data in the object of rows
             } else{
                 console.log(err);
             }
@@ -198,7 +199,8 @@ exports.delete = (req, res) => {
             connection.release();
 
             if(!err){
-                res.redirect('/'); // Redirect to home page once deleted
+                let removedUser = encodeURIComponent('User has been Deleted Successfully!'); // Delete Message
+                res.redirect('/?removed=' + removedUser); // Redirect to home page once deleted
             } else{
                 console.log(err);
             }
