@@ -180,3 +180,31 @@ exports.update = (req, res) => {
 
     });
 };
+
+
+// Delete User
+exports.delete = (req, res) => {
+
+    pool.getConnection((err, connection) => {
+        if(err) throw err; // not connected
+        console.log('Connected as ID: ' + connection.threadId);
+
+        let sql = 'DELETE FROM users WHERE usersId = ?'; // sql query
+        let userId = [req.params.id]; // gets the id in the URL
+
+       // Use the connection
+        connection.query(sql, userId, (err, rows) => {
+            // When done with the connection, release it.
+            connection.release();
+
+            if(!err){
+                res.redirect('/'); // Redirect to home page once deleted
+            } else{
+                console.log(err);
+            }
+
+            // console.log('The data from user table: \n', rows);
+        })
+
+    });
+};

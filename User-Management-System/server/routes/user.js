@@ -12,5 +12,6 @@ router.get('/adduser', userController.add) // Routes to Add User page
 router.post('/adduser', userController.create); // Create Data
 router.get('/edituser/:id', userController.edit) // Routes to Add User page
 router.post('/edituser/:id', userController.update); // Create Data
+router.get('/:id', userController.delete); // Delete Data
 
 module.exports = router;
